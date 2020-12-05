@@ -1,0 +1,16 @@
+kind: pipeline
+type: docker
+name: Kernel Builder
+clone:
+  depth: 1
+
+steps:
+- name: Build Kernel for Old Cam
+  image: crazyuploader/kernel_build
+  commands:
+    - curl -s https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh | bash -
+
+- name: Build Kernel for New Cam
+  image: crazyuploader/kernel_build
+  commands:
+    - curl -s https://raw.githubusercontent.com/crazyuploader/Bash/master/kbuild.sh | bash -s -- whyred-newcam_defconfig
